@@ -25689,12 +25689,12 @@ function removeToken() {
 
 app.controller = function () {
   if (m.route() === '/') {
-    // console.log(m.route(), document.referrer, location.hash);
+    console.log(m.route(), document.referrer, location.hash);
     if (document.referrer === 'https://www.dropbox.com/' && location.hash !== "") {
       var token = queryString.parse(location.hash).access_token;
       setToken(token);
       app.config = new app.Config({ 'token': getToken() });
-      starter.init(app.config, m.redraw);
+      starter.init(app.config);
     }
     m.route('/HomePage');
   }
@@ -25841,7 +25841,7 @@ var files = [
 ];
 
 var starter = {
-  init: function(config, cb) {
+  init: function(config) {
     var dbx = config.dbx;
     dbx.filesGetMetadata({ 'path': "/HomePage.md" })
     .then(function(response) {
